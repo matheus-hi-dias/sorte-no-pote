@@ -1,18 +1,36 @@
-import { StyleSheet, Image, Platform, ScrollView } from "react-native";
-
-import { Collapsible } from "@/components/Collapsible";
-import { ExternalLink } from "@/components/ExternalLink";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { IconSymbol } from "@/components/ui/IconSymbol";
+import { StyleSheet, ScrollView, FlatList } from "react-native";
+import DrawHistoryCard from "@/components/DrawHistoryCard";
 
 export default function HistoryScreen() {
+  const cards = [
+    <DrawHistoryCard
+      type="Sorteio único"
+      title="Sorteio de Natal"
+      date="25/12/2021"
+      participants={10}
+      results={1}
+    />,
+    <DrawHistoryCard
+      type="Sorteio único"
+      title="Sorteio de Natal"
+      date="25/12/2021"
+      participants={10}
+      results={1}
+    />,
+  ];
   return (
-    <ScrollView>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">History</ThemedText>
-      </ThemedView>
+    <ScrollView
+      style={{
+        flex: 1,
+        padding: 20,
+      }}
+    >
+      <FlatList
+        data={cards}
+        renderItem={({ item }) => <>{item}</>}
+        keyExtractor={(_, index) => `index-${index}`}
+        contentContainerStyle={{ gap: 8 }}
+      />
     </ScrollView>
   );
 }
